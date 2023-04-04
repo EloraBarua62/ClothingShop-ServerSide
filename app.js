@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 // import routes
 const userRoute = require('./routers/user.route');
+const productRoute = require('./routers/product.route');
 
 
 // create app
@@ -25,6 +26,10 @@ app.get('/' , (req,res) => {
 
 // User account route
 app.use("/api/v1/user", userRoute);
+
+
+// Product route
+app.use("/api/v1/product", productRoute);
 
 
 module.exports = app;

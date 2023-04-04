@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // PRODUCT SCHEMA DESIGN
 const productSchema = mongoose.Schema({
   
-    // Product Name field
+  // Field: Product Name
   productName: {
     type: String,
     required: [true, "Please provide product's name"],
@@ -14,31 +14,34 @@ const productSchema = mongoose.Schema({
     maxLength: [50, "Shorten product name"],
   },
 
-  // Category ID field
+  // Field: Category ID
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
+    // required: [true, "Please provide product's category"],
   },
 
-  // Brand ID field
+  // Field: Brand ID
   brandId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Brand",
+    // required: [true, "Please provide product's brand"],
   },
 
-  // Shop ID field
+  // Field: Shop ID
   shopId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Shop",
+    // required: [true, "Please provide product's shop"],
   },
 
-  // Type field
+  // Field: Dress Type
   dressType: {
     type: String,
     required: [true, "Please select product type"],
   },
 
-  // Material field
+  // Field: Marterial
   material: {
     type: String,
     required: [true, "Please select product material"],
@@ -47,7 +50,7 @@ const productSchema = mongoose.Schema({
   // Field: Size
   size: {
     type: Number,
-    required: [true, "Please select product size"],
+    // required: [true, "Please select product size"],
   },
 
   // Field: Color With Available Quantity
@@ -86,7 +89,7 @@ const productSchema = mongoose.Schema({
     required: [true, "Please add product description"],
     trim: true,
     minLength: [50, "Please describe more"],
-    maxLength: [100, "Product description cross limit"],
+    maxLength: [200, "Product description cross limit"],
   },
 
   // Field: SKU
@@ -106,4 +109,14 @@ const productSchema = mongoose.Schema({
     type: Number,
     required: [true, "Please select amount of product order"],
   },
-});
+
+  productChangedAt: Date
+},
+{
+  timestamps: true
+}
+);
+
+
+const Product = mongoose.model('Product' , productSchema);
+module.exports = Product;
