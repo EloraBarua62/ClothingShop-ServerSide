@@ -16,8 +16,5 @@
     "mongoose": "^7.0.2",
     "nodemon": "^2.0.21",
     "validator": "^13.9.0"
-  },
-  "engines": {
-    "node": ">=14 <15"
   }
 }
