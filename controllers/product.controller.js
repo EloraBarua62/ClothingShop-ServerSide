@@ -94,7 +94,7 @@ exports.getProductList = async(req, res) => {
         
 
         productListQuery = Object.assign(searchText, others, query);
-        console.log(productListQuery);
+        // console.log(productListQuery);
         
         // const page = parseInt(req.query.page)-1 || 0;
         // const limit = parseInt(req.query.limit) || 10;
@@ -134,7 +134,7 @@ exports.getProductList = async(req, res) => {
         
         // const productList = await getProductListService(productListQuery);
 
-        console.log(productList)
+        // console.log(productList)
         if(!productList.length){
             return res.status(204).json({
             status: "fail",
