@@ -126,6 +126,13 @@ const userSchema = mongoose.Schema(
       default: [],
     },
 
+    // Field: Role
+    role: {
+      type: String,
+      enum: ["buyer" , "store-manager" , 'admin'],
+      default: "buyer"
+    },
+
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpire: Date,

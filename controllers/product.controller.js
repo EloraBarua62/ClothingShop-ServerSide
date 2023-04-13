@@ -42,17 +42,17 @@ exports.getProductList = async(req, res) => {
         let productListQuery = req.query;
         
         let {
-          page = parseInt(productListQuery.page) - 1 || 0,
-          limit = parseInt(productListQuery.limit) || 10,
-          search = productListQuery.search || "",
-          // sort = productListQuery.sort || "createdAt",
-          minPrice,
-          maxPrice,
-          categoryId = productListQuery.categoryId || "",
-          brandName = productListQuery.brandName || "",
-          dressType = productListQuery.dressType || "All",
-          material = productListQuery.material || "",
-          color = productListQuery.color || "",      
+          page = parseInt(productListQuery?.page) - 1 || 0,
+          limit = parseInt(productListQuery?.limit) || 0,
+          search = productListQuery?.search || "",
+          // sort = productListQuery?.sort || "createdAt",
+          minPrice = productListQuery?.minPrice || 0,
+          maxPrice = productListQuery?.maxPrice || Number.MAX_SAFE_INTEGER,
+          categoryId = productListQuery?.categoryId || "",
+          brandName = productListQuery?.brandName || "",
+          dressType = productListQuery?.dressType || "All",
+          material = productListQuery?.material || "",
+          color = productListQuery?.color || "",
           ...others
         } = productListQuery;
 
@@ -63,8 +63,8 @@ exports.getProductList = async(req, res) => {
         ? (dressType = [...dressTypeList]) 
         : (dressType = dressType.split(","));
 
-        console.log(dressType)
-        console.log(productListQuery);
+        // console.log(dressType)
+        // console.log(productListQuery);
 
         // Array of BrandName
         brandName = brandName.split(',');
@@ -83,8 +83,8 @@ exports.getProductList = async(req, res) => {
         
         const query = {
           pricePerPiece: {
-            $gte: productListQuery?.minPrice || 0,
-            $lte: productListQuery?.maxPrice || Number.MAX_SAFE_INTEGER,
+            $gte: minPrice,
+            $lte: maxPrice,
           },
           // categoryId
         };
@@ -122,15 +122,13 @@ exports.getProductList = async(req, res) => {
         // }
 
         const productList = await Product.find(productListQuery)
-          // .where("brand.brandName")
-          // .in([...brandName])
           .where("dressType")
           .in([...dressType])
           .where("material")
           .in([...material])
           .where("colorWithAvailableQuantity.color")
           .in([...color])
-          .skip(page*limit);
+          .skip(page * limit);
         
         // const productList = await getProductListService(productListQuery);
 
@@ -142,7 +140,7 @@ exports.getProductList = async(req, res) => {
         });
         }
 
-         res.status(200).json({
+          res.status(200).json({
            status: "success",
            message: "Product list loaded successfully",
            data: productList,
