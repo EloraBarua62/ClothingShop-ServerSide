@@ -43,18 +43,18 @@ exports.getProductList = async(req, res) => {
       let productListQuery = req.query;
 
       let {
-        page = parseInt(productListQuery?.page) - 1 || 0,
-        limit = parseInt(productListQuery?.limit) || 0,
+        // page = parseInt(productListQuery?.page) - 1 || 0,
+        // limit = parseInt(productListQuery?.limit) || 0,
         search = productListQuery?.search || "",
         // sort = productListQuery?.sort || "createdAt",
-        minPrice = productListQuery?.minPrice || 0,
-        maxPrice = productListQuery?.maxPrice || Number.MAX_SAFE_INTEGER,
-        categoryId = productListQuery?.categoryId || "",
-        brandName = productListQuery?.brandName || "",
+        // minPrice = productListQuery?.minPrice || 0,
+        // maxPrice = productListQuery?.maxPrice || Number.MAX_SAFE_INTEGER,
+        // categoryId = productListQuery?.categoryId || "",
+        // brandName = productListQuery?.brandName || "",
         dressType = productListQuery?.dressType || "All",
-        material = productListQuery?.material || "",
-        color = productListQuery?.color || "",
-        ...others
+        // material = productListQuery?.material || "",
+        // color = productListQuery?.color || "",
+        // ...others
       } = productListQuery;
 
       // console.log(page, limit, others, dressType);
@@ -67,31 +67,31 @@ exports.getProductList = async(req, res) => {
       // console.log(productListQuery);
 
       // Array of BrandName
-      brandName = brandName.split(",");
+      // brandName = brandName.split(",");
 
       // Array of material
-      material = material.split(",");
+      // material = material.split(",");
 
       // Array of color
-      color = color.split(",");
+      // color = color.split(",");
       // console.log(page, limit, brandName, dressType, material, color);
 
       // const searchText = {$or : [{productName : {$regex: search, $options: "i"}} , {"brandId.brandName" : {$regex: search, $options: "i"}} , {"shopId.shopName" : {$regex: search, $options: "i"}}]};
 
-      const query = {
-        pricePerPiece: {
-          $gte: minPrice,
-          $lte: maxPrice,
-        },
-        // categoryId
-      };
+      // const query = {
+      //   pricePerPiece: {
+      //     $gte: minPrice,
+      //     $lte: maxPrice,
+      //   },
+      //   // categoryId
+      // };
 
       let searchText = {};
       if (search != "") {
         searchText = { productName: { $regex: search, $options: "i" } };
       }
 
-      productListQuery = Object.assign(searchText, others, query);
+      // productListQuery = Object.assign(searchText, others, query);
       // console.log(productListQuery);
 
       // const page = parseInt(req.query.page)-1 || 0;
