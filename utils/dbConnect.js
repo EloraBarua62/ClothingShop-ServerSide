@@ -7,8 +7,9 @@ const dotenv = require("dotenv").config();
 
 
 // db connection
-const DbConnect = mongoose.connect(process.env.DATABASE_LOCAL).then(() => {
+const DbConnect = mongoose.connect(process.env.DATABASE).then(() => {
   console.log("db connected");
 });
 
 module.exports = DbConnect;
+
